@@ -3,9 +3,8 @@ import React from 'react'
 
 import { Dimensions, StatusBar, Text, TouchableOpacity, View, Image } from 'react-native'
 
-const { width, height } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 const scale = (v) => parseInt(v * width / 360)
-const noop = () => {}
 const icons = {
   person: require('../assets/icons/ic_person_white_48dp.png'),
   lock: require('../assets/icons/ic_lock_outline_white_48dp.png')
@@ -24,6 +23,7 @@ export const AlignCenterText = styled.Text`
   font-size: ${props => scale(props.fontSize || 20)};
   font-weight: 200;
   font-family: 'acrom-light';
+  text-decoration-line: ${props => props.underline ? 'underline' : 'none'};
 `
 
 // 登录的按钮组件
@@ -50,6 +50,7 @@ export const LoginButton = styled(props => (
   position: absolute;  
 `
 
+// 登录的输入框的组件
 const LeftIcon = styled.Image`
   width: ${() => scale(24)};
   height: ${() => scale(24)};
@@ -74,10 +75,16 @@ const RightInput = styled.TextInput.attrs({
   font-family: 'acrom';
 `
 
-export const LoginInputUsername = styled(props => (
+// 一个通用性较高的组件
+export const LoginInput = styled(props => (
   <View style={props.style}>
     <LeftIcon source={icons[props.iconName]}/>
-    <RightInput placeholder={props.placeholder}/>
+    <RightInput
+      placeholder={props.placeholder}
+      onChangeText={(text) => props.onChangeText && props.onChangeText(text)}
+      value={props.value}
+      secureTextEntry={props.password}
+    />
   </View>
 )).attrs({
   placeholder: 'USERNAME'
@@ -91,7 +98,6 @@ export const LoginInputUsername = styled(props => (
   background-color: rgba(255,255,255,0.22);
   
   left: ${() => scale(68)};
-  top: ${() => scale(280)};
   position: absolute;
   
   border-radius: ${() => scale(10)};
@@ -102,22 +108,26 @@ export const LoginInputUsername = styled(props => (
   padding-right: ${() => scale(10)};
 `
 
-export const LoginInputPassword = LoginInputUsername.extend.attrs({
-  placeholder: 'PASSWORD'
+export const LoginInputUsername = LoginInput.extend.attrs({
+  placeholder: 'USERNAME',
+  password: false
+})`
+  top: ${() => scale(280)};
+`
+export const LoginInputPassword = LoginInput.extend.attrs({
+  placeholder: 'PASSWORD',
+  password: true
 })`
   top: ${() => scale(352)};
 `
 
-const AlignCenterTextUnderline = AlignCenterText.extend`
-  text-decoration-line: underline;
-`
-
+// 忘记登录密码
 export const LoginForgetPass = styled(props => (
   <TouchableOpacity style={props.style} onPress={() => props.onPress && props.onPress()}>
-    <AlignCenterTextUnderline fontSize={14} children={'Forget Password?'}/>
+    <AlignCenterText underline={true} fontSize={14} children={'Forget Password?'}/>
   </TouchableOpacity>
 ))`
-  bottom: ${5};
+  top: ${() => scale(615)};
   position: absolute;
   width: 100%
 `

@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import styled from 'styled-components/native'
 
 import {
   FullscreenContainer,
@@ -15,6 +14,13 @@ import {
 const LoginContainer = FullscreenContainer.withComponent(LinearGradient)
 
 export default class Login extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      username: '',
+      password: ''
+    }
+  }
   render () {
     return (
       <LoginContainer
@@ -22,9 +28,17 @@ export default class Login extends React.Component {
         end={{x: 1, y: 0}}
         colors={['#36D1DC', '#5B86E5']}
       >
-        <LoginInputUsername iconName={'person'}/>
-        <LoginInputPassword iconName={'lock'}/>
-        <LoginButton onPress={() => Alert.alert('LOGIN TAPPED!')}/>
+        <LoginInputUsername
+          iconName={'person'}
+          value={this.state.username}
+          onChangeText={username => this.setState({ username })}
+        />
+        <LoginInputPassword
+          iconName={'lock'}
+          value={this.state.password}
+          onChangeText={password => this.setState({ password })}
+        />
+        <LoginButton onPress={() => Alert.alert('LOGIN TAPPED!', [this.state.username, this.state.password].join(' '))}/>
         <LoginForgetPass/>
       </LoginContainer>
     )
