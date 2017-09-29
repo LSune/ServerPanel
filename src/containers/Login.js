@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
+import { Link } from 'react-router-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import {
@@ -39,7 +40,9 @@ export default class Login extends React.Component {
           onChangeText={password => this.setState({ password })}
         />
         <LoginButton onPress={() => Alert.alert('LOGIN TAPPED!', [this.state.username, this.state.password].join(' '))}/>
-        <LoginForgetPass/>
+        <Link to={'/signup'}>
+          <Text>aaaaaa</Text>
+        </Link>
       </LoginContainer>
     )
   }

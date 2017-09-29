@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router'
 // import { Switch, Route } from 'react-router-native'
 
 import Login from '../containers/Login'
+import SignUp from '../containers/SignUp'
 
 // 这很Vue
 const routesConfig = [
@@ -13,6 +14,11 @@ const routesConfig = [
     path: '/',
     exact: true,
     component: Login
+  },
+  {
+    path: '/signup',
+    exact: false,
+    component: SignUp
   }
   // {
   //   path: '/search',
