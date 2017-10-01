@@ -47,7 +47,8 @@ export default class Login extends React.Component {
     )
   }
   componentDidMount () {
-    Keyboard.addListener('keyboardDidShow', () => { this.setState({ wrapperHeight: width * 0.85 }) })
-    Keyboard.addListener('keyboardDidHide', () => { this.setState({ wrapperHeight: this.initialState.wrapperHeight }) })
+    // 响应键盘的动作。
+    Keyboard.addListener('keyboardDidShow', () => this.setState({ wrapperHeight: width * 0.85 }))
+    Keyboard.addListener('keyboardDidHide', () => this.setState({ wrapperHeight: this.initialState.wrapperHeight }))
   }
 }

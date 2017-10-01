@@ -1,6 +1,6 @@
 import React from 'react'
-import { StatusBar, View, Alert, BackHandler } from 'react-native'
-import { NativeRouter } from 'react-router-native'
+import { StatusBar, View, Alert } from 'react-native'
+import { NativeRouter, AndroidBackButton } from 'react-router-native'
 import styled from 'styled-components/native'
 
 import RootRoute from './src/routes'
@@ -15,6 +15,7 @@ export default class App extends React.Component {
       <NativeRouter>
         <RootContainer>
           <StatusBar translucent={true} backgroundColor={'rgba(0,0,0,0.1)'}/>
+          <AndroidBackButton/>
           <RootRoute/>
         </RootContainer>
       </NativeRouter>
@@ -22,4 +23,4 @@ export default class App extends React.Component {
   }
 }
 
-BackHandler.addEventListener('hardwareBackPress', () => { Alert.alert('back'); return true })
+// BackHandler.addEventListener('hardwareBackPress', () => { Alert.alert('back'); return true })

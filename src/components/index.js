@@ -80,6 +80,16 @@ FlexView.propTypes = {
   flexShrink: PropTypes.number
 }
 
+// View with size
+export const ViewWithSize = styled.View`
+  height: ${props => props.height || 'auto'};
+  width: ${props => props.width || 'auto'};
+`
+ViewWithSize.propTypes = {
+  height: PropTypes.number,
+  width: PropTypes.number
+}
+
 export const SignUpHeadline = styled.Text`
   font-family: 'acrom';
   font-size: ${() => scale(36)};
@@ -119,3 +129,36 @@ export const SignUpInput = styled(props => (
 export const SignUpInputUsername = SignUpInput.extend`
 
 `
+
+export const RoundRectButton = styled(props => (
+  <TouchableOpacity style={props.style} onPress={() => props.onPress && props.onPress()}>
+    <AlignCenterText children={props.text} color={props.color}/>
+  </TouchableOpacity>
+))`
+  width: ${() => scale(172)};
+  height: ${() => scale(53)};
+  
+  border-radius: ${() => scale(53 / 2)};
+  border: solid 1px #fff;
+  
+  background-color: ${props => props.backgroundColor};
+  
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: ${() => width * 0.1};
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+`
+RoundRectButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  onPress: PropTypes.func,
+  backgroundColor: PropTypes.string
+}
+RoundRectButton.defaultProps = {
+  backgroundColor: 'transparent',
+  color: '#FFF',
+  onPress: () => {}
+}

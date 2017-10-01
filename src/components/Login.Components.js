@@ -18,6 +18,7 @@ import {
 import {
   LeftIcon,
   RightInput,
+  RoundRectButton,
   AlignCenterText
 } from './index'
 
@@ -38,27 +39,7 @@ export const LoginContainer = styled.View`
 
 // ============================================================================================
 // 登录的按钮组件
-export const LoginButton = styled(props => (
-  <TouchableOpacity style={props.style} onPress={() => props.onPress && props.onPress()}>
-    <AlignCenterText children={'LOG IN'}/>
-  </TouchableOpacity>
-))`
-  width: ${() => scale(172)};
-  height: ${() => scale(53)};
-  
-  border-radius: ${() => scale(53 / 2)};
-  border: solid 1px #fff;
-  
-  background-color: transparent;
-  
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: ${() => width * 0.1};
-  
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
+export const LoginButton = props => <RoundRectButton {...props} text={'LOG IN'}/>
 
 // ============================================================================================
 // 登录控件的包裹曾

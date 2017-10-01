@@ -5,14 +5,20 @@ import React from 'react'
 import { Switch, Route } from 'react-router'
 // import { Switch, Route } from 'react-router-native'
 
-import Login from '../containers/Login'
 import SignUp from '../containers/SignUp'
+import Entry from '../containers/Entry'
+import Login from '../containers/Login'
 
 // 这很Vue
 const routesConfig = [
   {
     path: '/',
     exact: true,
+    component: Entry
+  },
+  {
+    path: '/login',
+    exact: false,
     component: Login
   },
   {
