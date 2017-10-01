@@ -8,7 +8,7 @@ import {
   LoginInputPassword,
   LoginForgetPass,
   LoginControlsWrapper
-} from '../components/login'
+} from '../components/Login.Components'
 
 import { FlexView } from '../components/index'
 
@@ -17,7 +17,7 @@ const { width } = Dimensions.get('window')
 export default class Login extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
+    this.state = this.initialState = {
       username: '',
       password: '',
       wrapperHeight: width * 1
@@ -48,6 +48,6 @@ export default class Login extends React.Component {
   }
   componentDidMount () {
     Keyboard.addListener('keyboardDidShow', () => { this.setState({ wrapperHeight: width * 0.85 }) })
-    Keyboard.addListener('keyboardDidHide', () => { this.setState({ wrapperHeight: width * 1 }) })
+    Keyboard.addListener('keyboardDidHide', () => { this.setState({ wrapperHeight: this.initialState.wrapperHeight }) })
   }
 }

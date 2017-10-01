@@ -1,3 +1,6 @@
+/**
+ * 登录相关的组件，使用styled components装饰各个组件
+ */
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
@@ -91,6 +94,7 @@ export class LoginControlsWrapper extends React.Component {
     ).start()
   }
   componentWillReceiveProps (nextProps) {
+    // this.setState(state, callback)
     this.setState({
       heightAnim: new Animated.Value(this.props.height)
     }, () => {
