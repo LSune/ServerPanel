@@ -22,6 +22,8 @@ export default class Login extends React.Component {
       password: '',
       wrapperHeight: width * 1
     }
+    this.handleKeyboardShow = this.handleKeyboardShow.bind(this)
+    this.handleKeyboardHide = this.handleKeyboardHide.bind(this)
   }
   render () {
     return (
@@ -46,9 +48,19 @@ export default class Login extends React.Component {
       </LoginContainer>
     )
   }
+  handleKeyboardShow () {
+    this.setState({ wrapperHeight: width * 0.85 })
+  }
+  handleKeyboardHide () {
+    this.setState({ wrapperHeight: this.initialState.wrapperHeight })
+  }
   componentDidMount () {
     // 响应键盘的动作。
-    Keyboard.addListener('keyboardDidShow', () => this.setState({ wrapperHeight: width * 0.85 }))
-    Keyboard.addListener('keyboardDidHide', () => this.setState({ wrapperHeight: this.initialState.wrapperHeight }))
+    Keyboard.addListener('keyboardDidShow', this.handleKeyboardShow)
+    Keyboard.addListener('keyboardDidHide', this.handleKeyboardHide)
+  }
+  componentWillUnmount () {
+    Keyboard.removeListener('keyboardDidShow', this.handleKeyboardShow)
+    Keyboard.removeListener('keyboardDidHide', this.handleKeyboardHide)
   }
 }

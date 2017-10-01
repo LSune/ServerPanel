@@ -25,8 +25,8 @@ import {
 const { width } = Dimensions.get('window')
 const scale = v => parseInt(v * width / 360)
 const icons = {
-  person: require('../assets/icons/ic_person_white_48dp.png'),
-  lock: require('../assets/icons/ic_lock_outline_white_48dp.png')
+  person: require('../assets/icons/user_white@png.png'),
+  lock: require('../assets/icons/password_white@png.png')
 }
 
 // ============================================================================================
