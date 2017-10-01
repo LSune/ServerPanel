@@ -45,21 +45,25 @@ export const LoginButton = props => <RoundRectButton {...props} text={'LOG IN'}/
 // 登录控件的包裹曾
 export class LoginControlsWrapper extends React.Component {
   static propTypes = {
-    height: PropTypes.number.isRequired
+    height: PropTypes.number.isRequired,
+    initHeight: PropTypes.number.isRequired
   }
   constructor (props) {
     super(props)
     this.state = {
-      heightAnim: new Animated.Value(0)
+      heightAnim: new Animated.Value(props.initHeight)
     }
   }
   render () {
     return (
       <Animated.View
-        style={{
-          height: this.state.heightAnim
-          // height: this.props.height
-        }}
+        style={[
+          {
+            height: this.state.heightAnim
+            // height: this.props.height
+          },
+          this.props.style
+        ]}
       >
         {this.props.children || null}
       </Animated.View>

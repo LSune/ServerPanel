@@ -9,25 +9,30 @@ import {
   SignUpInputUsername,
   SignUpInputEmail,
   SignUpInputPassword,
-  SignUpContainer
+  SignUpContainer,
+  SignUpControlWrapper,
+  SignUpBlueButton
 } from '../components/SignUp.Components'
+
+const { width } = Dimensions.get('window')
 
 export default class SignUp extends React.Component {
   render () {
     return (
       <SignUpContainer>
-        <FlexView flexGrow={2}>
+        <FlexView>
           <CircleBackground>
             <SignUpHeadline>
               Create Your Account
             </SignUpHeadline>
           </CircleBackground>
         </FlexView>
-        <FlexView flexGrow={3}>
+        <SignUpControlWrapper height={width * 1.1} initHeight={width * 1.1}>
           <SignUpInputUsername/>
           <SignUpInputEmail/>
           <SignUpInputPassword/>
-        </FlexView>
+          <SignUpBlueButton/>
+        </SignUpControlWrapper>
       </SignUpContainer>
     )
   }

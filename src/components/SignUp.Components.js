@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import LinearGradient from 'react-native-linear-gradient'
 import {
@@ -14,8 +13,10 @@ import {
 
 import {
   LeftIcon,
-  RightInput
+  RightInput, RoundRectButton,
+  ViewWithSize
 } from './index'
+import { LoginControlsWrapper } from './Login.Components'
 
 const { width } = Dimensions.get('window')
 const scale = v => parseInt(v * width / 360)
@@ -106,3 +107,20 @@ export const SignUpInputPassword = SignUpInput.extend.attrs({
   iconName: 'lock',
   password: true
 })``
+
+export const SignUpControlWrapper = styled(LoginControlsWrapper)`
+  padding-top: ${48};
+`
+
+export const SignUpBlueButton = styled(props => {
+  return <RoundRectButton {...props} text={'SIGN UP'}/>
+}).attrs({
+  elevation: 4
+})`
+  shadow-color: 'rgba(99,205,255,0.61)';
+  shadow-opacity: 1;
+  shadow-radius: 6;
+  
+  border-width: 0;
+  background-color: #33b5e5;
+`

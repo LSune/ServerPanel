@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import React from 'react'
 
-import { Dimensions, StatusBar, Text, TouchableOpacity, View, Image, Animated } from 'react-native'
+import { Dimensions, StatusBar, Text, TouchableHighlight, View, Image, Animated, Button } from 'react-native'
 
 const { width } = Dimensions.get('window')
 const scale = (v) => parseInt(v * width / 360)
@@ -69,11 +69,37 @@ ViewWithSize.propTypes = {
   width: PropTypes.number
 }
 
-export const RoundRectButton = styled(props => (
-  <TouchableOpacity style={props.style} onPress={() => props.onPress && props.onPress()}>
-    <AlignCenterText children={props.text} color={props.color}/>
-  </TouchableOpacity>
-))`
+export const RoundRectButton = styled(class extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      scale: 1
+    }
+  }
+  render () {
+    const { props } = this
+    return (
+      <View
+        onStartShouldSetResponder={() => true}
+        onMoveShouldSetResponder={() => true}
+        elevation={props.elevation}
+        style={[
+          // compose two styleSheet
+          {
+            transform: [
+              {scale: this.state.scale}
+            ]
+          },
+          props.style
+        ]}
+        onResponderStart={() => this.setState({ scale: 0.95 })}
+        onResponderRelease={() => this.setState({ scale: 1 }, () => props.onPress && props.onPress())}
+      >
+        <AlignCenterText children={props.text} color={props.color}/>
+      </View>
+    )
+  }
+})`
   width: ${() => scale(172)};
   height: ${() => scale(53)};
   

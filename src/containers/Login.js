@@ -33,7 +33,10 @@ export default class Login extends React.Component {
         colors={['#36D1DC', '#5B86E5']}
       >
         <FlexView/>
-        <LoginControlsWrapper height={this.state.wrapperHeight}>
+        <LoginControlsWrapper
+          height={this.state.wrapperHeight}
+          initHeight={this.state.wrapperHeight}
+        >
           <LoginInputUsername
             value={this.state.username}
             onChangeText={username => this.setState({ username })}
@@ -42,7 +45,7 @@ export default class Login extends React.Component {
             value={this.state.password}
             onChangeText={password => this.setState({ password })}
           />
-          <LoginButton onPress={() => Alert.alert('LOGIN TAPPED!', [this.state.username, this.state.password].join(' '))}/>
+          <LoginButton onPress={() => Keyboard.dismiss()}/>
           <LoginForgetPass/>
         </LoginControlsWrapper>
       </LoginContainer>
