@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, View } from 'react-native'
+import { StatusBar, View, Alert, BackHandler } from 'react-native'
 import { NativeRouter } from 'react-router-native'
 import styled from 'styled-components/native'
 
@@ -21,3 +21,5 @@ export default class App extends React.Component {
     )
   }
 }
+
+BackHandler.addEventListener('hardwareBackPress', () => { Alert.alert('back'); return true })

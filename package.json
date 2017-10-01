@@ -29,7 +29,8 @@
     "react-native-linear-gradient": "^2.3.0",
     "react-router-native": "^4.2.0",
     "react-router": "^4.2.0",
-    "styled-components": "^2.2.0"
+    "styled-components": "^2.2.0",
+    "prop-types": "latest"
   },
   "rnpm": {
     "assets": [

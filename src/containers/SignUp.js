@@ -1,9 +1,16 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import styled from 'styled-components/native'
+import { View, Text, Dimensions, Alert } from 'react-native'
 
-import { FullscreenContainer, CircleBackground, FlexView, SignUpHeadline, SignUpInputUsername } from '../components/index'
+import {
+  FullscreenContainer,
+  CircleBackground,
+  FlexView,
+  SignUpHeadline,
+  SignUpInputUsername
+} from '../components/index'
 
-const SignUpContainer = FullscreenContainer.extend`
+const SignUpContainer = styled.View`
   padding-top: 0;
 `
 
@@ -25,3 +32,5 @@ export default class SignUp extends React.Component {
     )
   }
 }
+
+Dimensions.addEventListener('change', e => { Alert.alert('Viewport Size Changed!', e.toString()) })

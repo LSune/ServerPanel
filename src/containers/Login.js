@@ -1,25 +1,26 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
-import { Link } from 'react-router-native'
-import LinearGradient from 'react-native-linear-gradient'
+import { StyleSheet, Alert, Keyboard, Text, Dimensions } from 'react-native'
 
 import {
-  FullscreenContainer,
+  LoginContainer,
   LoginButton,
   LoginInputUsername,
   LoginInputPassword,
-  LoginForgetPass
-} from '../components'
+  LoginForgetPass,
+  LoginControlsWrapper
+} from '../components/login'
 
-// using LinearGradient as a component to styled it
-const LoginContainer = FullscreenContainer.withComponent(LinearGradient)
+import { FlexView } from '../components/index'
+
+const { width } = Dimensions.get('window')
 
 export default class Login extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      wrapperHeight: width * 1
     }
   }
   render () {
@@ -29,21 +30,24 @@ export default class Login extends React.Component {
         end={{x: 1, y: 0}}
         colors={['#36D1DC', '#5B86E5']}
       >
-        <LoginInputUsername
-          iconName={'person'}
-          value={this.state.username}
-          onChangeText={username => this.setState({ username })}
-        />
-        <LoginInputPassword
-          iconName={'lock'}
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
-        />
-        <LoginButton onPress={() => Alert.alert('LOGIN TAPPED!', [this.state.username, this.state.password].join(' '))}/>
-        <Link to={'/signup'}>
-          <Text>aaaaaa</Text>
-        </Link>
+        <FlexView/>
+        <LoginControlsWrapper height={this.state.wrapperHeight}>
+          <LoginInputUsername
+            value={this.state.username}
+            onChangeText={username => this.setState({ username })}
+          />
+          <LoginInputPassword
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+          />
+          <LoginButton onPress={() => Alert.alert('LOGIN TAPPED!', [this.state.username, this.state.password].join(' '))}/>
+          <LoginForgetPass/>
+        </LoginControlsWrapper>
       </LoginContainer>
     )
+  }
+  componentDidMount () {
+    Keyboard.addListener('keyboardDidShow', () => { this.setState({ wrapperHeight: width * 0.85 }) })
+    Keyboard.addListener('keyboardDidHide', () => { this.setState({ wrapperHeight: width * 1 }) })
   }
 }
