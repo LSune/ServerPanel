@@ -10,7 +10,7 @@ import {
   LoginControlsWrapper
 } from '../components/Login.Components'
 
-import { FlexView } from '../components/index'
+import { FlexView, LogoViewWrapper, LogoView } from '../components/index'
 
 const { width } = Dimensions.get('window')
 
@@ -20,7 +20,8 @@ export default class Login extends React.Component {
     this.state = this.initialState = {
       username: '',
       password: '',
-      wrapperHeight: width * 1
+      wrapperHeight: width * 1,
+      showLogo: true
     }
     this.handleKeyboardShow = this.handleKeyboardShow.bind(this)
     this.handleKeyboardHide = this.handleKeyboardHide.bind(this)
@@ -32,7 +33,12 @@ export default class Login extends React.Component {
         end={{x: 1, y: 0}}
         colors={['#36D1DC', '#5B86E5']}
       >
-        <FlexView/>
+        <LogoViewWrapper>
+          {
+            this.state.showLogo &&
+            <LogoView/>
+          }
+        </LogoViewWrapper>
         <LoginControlsWrapper
           height={this.state.wrapperHeight}
           initHeight={this.state.wrapperHeight}
@@ -40,10 +46,12 @@ export default class Login extends React.Component {
           <LoginInputUsername
             value={this.state.username}
             onChangeText={username => this.setState({ username })}
+            onFocus={() => this.setState({showLogo: false})}
           />
           <LoginInputPassword
             value={this.state.password}
             onChangeText={password => this.setState({ password })}
+            onFocus={() => this.setState({showLogo: false})}
           />
           <LoginButton onPress={() => Keyboard.dismiss()}/>
           <LoginForgetPass/>
@@ -52,10 +60,10 @@ export default class Login extends React.Component {
     )
   }
   handleKeyboardShow () {
-    this.setState({ wrapperHeight: width * 0.85 })
+    this.setState({ wrapperHeight: width * 0.85, showLogo: false })
   }
   handleKeyboardHide () {
-    this.setState({ wrapperHeight: this.initialState.wrapperHeight })
+    this.setState({ wrapperHeight: this.initialState.wrapperHeight, showLogo: true })
   }
   componentDidMount () {
     // 响应键盘的动作。

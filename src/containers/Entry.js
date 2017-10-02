@@ -6,7 +6,7 @@ import {
   LoginButton
 } from '../components/Login.Components'
 
-import { FlexView, ViewWithSize } from '../components'
+import { FlexView, ViewWithSize, LogoViewWrapper, LogoView } from '../components'
 import { WhiteRegButton } from '../components/Entry.Components'
 
 const { width } = Dimensions.get('window')
@@ -19,8 +19,8 @@ export default class Entry extends React.Component {
         end={{x: 1, y: 0}}
         colors={['#36D1DC', '#5B86E5']}
       >
-        <FlexView/>
-        <ViewWithSize height={width * 1.2} style={{ flexDirection: 'column', justifyContent: 'center' }}>
+        <LogoViewWrapper><LogoView/></LogoViewWrapper>
+        <ViewWithSize height={width * 0.8} style={{ flexDirection: 'column' }}>
           <WhiteRegButton onPress={() => this.props.history.push('/signup')}/>
           <LoginButton onPress={() => this.props.history.push('/login')}/>
         </ViewWithSize>

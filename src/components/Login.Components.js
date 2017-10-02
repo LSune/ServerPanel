@@ -101,7 +101,8 @@ export const LoginInput = styled(props => (
     <LeftIcon source={icons[props.iconName]}/>
     <RightInput
       placeholder={props.placeholder}
-      onChangeText={(text) => props.onChangeText && props.onChangeText(text)}
+      onChangeText={text => props.onChangeText && props.onChangeText(text)}
+      onFocus={() => props.onFocus && props.onFocus()}
       value={props.value}
       secureTextEntry={props.password}
     />

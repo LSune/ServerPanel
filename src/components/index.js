@@ -3,7 +3,16 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import React from 'react'
 
-import { Dimensions, StatusBar, Text, TouchableHighlight, View, Image, Animated, Button } from 'react-native'
+import {
+  Dimensions,
+  StatusBar,
+  Text,
+  TouchableHighlight,
+  View,
+  Image,
+  Animated,
+  Button
+} from 'react-native'
 
 const { width } = Dimensions.get('window')
 const scale = (v) => parseInt(v * width / 360)
@@ -127,3 +136,32 @@ RoundRectButton.defaultProps = {
   color: '#FFF',
   onPress: () => {}
 }
+
+const LogoIcon = styled.Image`
+  height: ${80};
+  width: ${80 * 227 / 216};
+`
+
+const LogoText = styled.Text`
+  height: ${80};
+  text-align-vertical: center;
+  font-size: ${50};
+  color: #fff;
+  font-family: 'acrom';
+  margin-left: ${10}
+`
+
+export const LogoView = styled(props => (
+  <View {...props}>
+    <LogoIcon source={require('../assets/icons/Group@png.png')}/>
+    <LogoText>Panel</LogoText>
+  </View>
+))`
+  flex-direction: row;
+  justify-content: center;
+`
+
+export const LogoViewWrapper = FlexView.extend`
+  flex-direction: column;
+  justify-content: center;
+`
