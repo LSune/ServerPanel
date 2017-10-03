@@ -10,7 +10,9 @@ import {
   LoginControlsWrapper
 } from '../components/Login.Components'
 
-import { FlexView, LogoViewWrapper, LogoView } from '../components/index'
+import { LogoViewWrapper, LogoView } from '../components/index'
+
+import autobind from 'autobind-decorator'
 
 const { width } = Dimensions.get('window')
 
@@ -21,10 +23,10 @@ export default class Login extends React.Component {
       username: '',
       password: '',
       wrapperHeight: width * 1,
-      showLogo: true
+      showLogo: true,
+      loginButtonDisabled: false,
+      loginButtonLoading: false
     }
-    this.handleKeyboardShow = this.handleKeyboardShow.bind(this)
-    this.handleKeyboardHide = this.handleKeyboardHide.bind(this)
   }
   render () {
     return (
@@ -53,16 +55,25 @@ export default class Login extends React.Component {
             onChangeText={password => this.setState({ password })}
             onFocus={() => this.setState({showLogo: false})}
           />
-          <LoginButton onPress={() => Keyboard.dismiss()}/>
+          <LoginButton
+            onPress={this.loginButtonOnPress}
+            isLoading={this.state.loginButtonLoading}
+            disabled={this.state.loginButtonDisabled}
+          />
           <LoginForgetPass/>
         </LoginControlsWrapper>
       </LoginContainer>
     )
   }
-  handleKeyboardShow () {
+  @autobind async loginButtonOnPress () {
+    this.setState({ loginButtonLoading: true, loginButtonDisabled: true })
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    this.setState({ loginButtonLoading: false, loginButtonDisabled: false })
+  }
+  @autobind handleKeyboardShow () {
     this.setState({ wrapperHeight: width * 0.85, showLogo: false })
   }
-  handleKeyboardHide () {
+  @autobind handleKeyboardHide () {
     this.setState({ wrapperHeight: this.initialState.wrapperHeight, showLogo: true })
   }
   componentDidMount () {
