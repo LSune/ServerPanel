@@ -13,22 +13,28 @@ import {
 import { LogoViewWrapper, LogoView } from '../components/index'
 
 import autobind from 'autobind-decorator'
+import { observer, inject } from 'mobx-react'
 
 const { width } = Dimensions.get('window')
 
+@inject('userStore')
+@observer
 export default class Login extends React.Component {
   constructor (props) {
     super(props)
+    // 这些状态是在我接触mobx之前写的，不是
+    // 很优雅，但是我想把他们放在这里起提醒作用
     this.state = this.initialState = {
-      username: '',
-      password: '',
       wrapperHeight: width * 1,
-      showLogo: true,
-      loginButtonDisabled: false,
-      loginButtonLoading: false
+      showLogo: true
     }
   }
+
+  handleUsernameChange = v => this.props.userStore.setLoginUsername(v)
+  handlePasswordChange = v => this.props.userStore.setLoginPassword(v)
+
   render () {
+    const { loginValues, inProgress } = this.props.userStore
     return (
       <LoginContainer
         start={{x: 0, y: 1}}
@@ -46,30 +52,26 @@ export default class Login extends React.Component {
           initHeight={this.state.wrapperHeight}
         >
           <LoginInputUsername
-            value={this.state.username}
-            onChangeText={username => this.setState({ username })}
+            value={loginValues.username}
+            onChangeText={this.handleUsernameChange}
             onFocus={() => this.setState({showLogo: false})}
           />
           <LoginInputPassword
-            value={this.state.password}
-            onChangeText={password => this.setState({ password })}
+            value={loginValues.password}
+            onChangeText={this.handlePasswordChange}
             onFocus={() => this.setState({showLogo: false})}
           />
           <LoginButton
-            onPress={this.loginButtonOnPress}
-            isLoading={this.state.loginButtonLoading}
-            disabled={this.state.loginButtonDisabled}
+            onPress={this.props.userStore.login()}
+            isLoading={inProgress}
+            disabled={inProgress}
           />
           <LoginForgetPass/>
         </LoginControlsWrapper>
       </LoginContainer>
     )
   }
-  @autobind async loginButtonOnPress () {
-    this.setState({ loginButtonLoading: true, loginButtonDisabled: true })
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    this.setState({ loginButtonLoading: false, loginButtonDisabled: false })
-  }
+
   @autobind handleKeyboardShow () {
     this.setState({ wrapperHeight: width * 0.85, showLogo: false })
   }
