@@ -14,8 +14,10 @@ import { LogoViewWrapper, LogoView } from '../components/index'
 
 import autobind from 'autobind-decorator'
 import { observer, inject } from 'mobx-react'
+import { LoginTransparentButton } from '../components/Button'
 
 const { width } = Dimensions.get('window')
+console.log(LoginTransparentButton)
 
 @inject('userStore')
 @observer
@@ -62,7 +64,7 @@ export default class Login extends React.Component {
             onFocus={() => this.setState({showLogo: false})}
           />
           <LoginButton
-            onPress={this.props.userStore.login()}
+            onPress={() => this.props.userStore.login()}
             isLoading={inProgress}
             disabled={inProgress}
           />

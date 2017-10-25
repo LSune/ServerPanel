@@ -54,7 +54,7 @@ class UserStore {
       body: JSON.stringify(this.regValues)
     }).then(e => {
       this.inProgress = false
-      console.log(e)
+      console.log(e.json())
     })
   }
 
@@ -68,7 +68,7 @@ class UserStore {
       body: JSON.stringify(this.loginValues)
     }).then(e => {
       this.inProgress = false
-      console.log(e)
+      console.log(e.json())
     })
   }
 }

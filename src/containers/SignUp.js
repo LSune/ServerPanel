@@ -62,7 +62,7 @@ export default class SignUp extends React.Component {
           <SignUpBlueButton
             isLoading={inProgress}
             disabled={inProgress}
-            onPress={this.props.userStore.register()}
+            onPress={() => this.props.userStore.register()}
           />
         </SignUpControlWrapper>
       </SignUpContainer>

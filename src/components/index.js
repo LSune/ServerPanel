@@ -167,27 +167,3 @@ export const LogoViewWrapper = FlexView.extend`
   flex-direction: column;
   justify-content: center;
 `
-
-// export const CenterLoading = styled.View`
-//   height: ${40};
-//   width: ${40};
-//
-//   background-color: aqua;
-//
-//   border-bottom-left-radius: ${20};
-//   border-bottom-right-radius: ${20};
-//   border-top-left-radius: ${20};
-//   border-top-right-radius: ${20};
-//
-//   border-bottom-color: #FFFFFF;
-//   border-bottom-width: ${3};
-//
-//   border-top-color: #FFFFFF;
-//   border-top-width: ${3};
-//
-//   border-left-color: #FFFFFF;
-//   border-left-width: ${3};
-//
-//   border-right-color: transparent;
-//   border-right-width: ${3};
-// `
