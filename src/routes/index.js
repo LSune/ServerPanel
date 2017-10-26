@@ -8,7 +8,8 @@ import { Switch, Route } from 'react-router'
 import SignUp from '../containers/SignUp'
 import Entry from '../containers/Entry'
 import Login from '../containers/Login'
-
+import MainPage from '../components/MainPage'
+import Instances from '../containers/Instances'
 // 这很Vue
 const routesConfig = [
   {
@@ -25,6 +26,18 @@ const routesConfig = [
     path: '/signup',
     exact: false,
     component: SignUp
+  },
+  {
+    path: '/main',
+    exact: false,
+    component: MainPage,
+    children: [
+      {
+        path: '/instances',
+        exact: false,
+        component: Instances
+      }
+    ]
   }
   // {
   //   path: '/search',
@@ -56,11 +69,11 @@ const routesConfig = [
 ]
 
 // 要求路由上的parent要能接受其children
-const MyRoute = (props) => (
+const MyRoute = props => (
   <Route
     path={props.path}
     exact={props.exact}
-    component={(localProps) =>
+    component={localProps =>
       <props.component {...localProps}>
         {
           props.children &&

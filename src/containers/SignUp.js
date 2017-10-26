@@ -7,6 +7,7 @@ import CircleBackground from '../components/SignUpTitle'
 
 import userStore from '../stores/userStore'
 import { observer, inject } from 'mobx-react'
+import { autorun } from 'mobx'
 
 import autobind from 'autobind-decorator'
 
@@ -18,6 +19,9 @@ export default class SignUp extends React.Component {
   state = {
     showTitle: true
   }
+
+  disposeErrorHandler = null
+
   handleUsernameChange = v => this.props.userStore.setRegUsername(v)
   handleEmailChange = v => this.props.userStore.setRegEmail(v)
   handlePasswordChange = v => this.props.userStore.setRegPassword(v)
@@ -67,9 +71,15 @@ export default class SignUp extends React.Component {
     // 响应键盘的动作。
     Keyboard.addListener('keyboardDidShow', this.handleKeyboardShow)
     Keyboard.addListener('keyboardDidHide', this.handleKeyboardHide)
+    this.disposeErrorHandler = autorun(() => {
+      this.props.userStore.errors &&
+        Alert.alert('登录失败！', this.props.userStore.errors.message)
+    })
   }
   componentWillUnmount () {
     Keyboard.removeListener('keyboardDidShow', this.handleKeyboardShow)
     Keyboard.removeListener('keyboardDidHide', this.handleKeyboardHide)
+    this.disposeErrorHandler()
+    this.props.userStore.clearErrors()
   }
 }
