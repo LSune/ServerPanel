@@ -6,13 +6,12 @@ import { FlexView } from '../components'
 import {
   CircleBackground,
   SignUpHeadline,
-  SignUpInputUsername,
-  SignUpInputEmail,
-  SignUpInputPassword,
   SignUpContainer,
-  SignUpControlWrapper,
-  SignUpBlueButton
+  SignUpControlWrapper
 } from '../components/SignUp.Components'
+
+import { SignUpInputE, SignUpInputP, SignUpInputU } from '../components/Input'
+import { SignUpBlueButton } from '../components/Button'
 
 import userStore from '../stores/userStore'
 import { observer, inject } from 'mobx-react'
@@ -44,17 +43,17 @@ export default class SignUp extends React.Component {
           </CircleBackground>
         </FlexView>
         <SignUpControlWrapper height={width * 1.1} initHeight={width * 1.1}>
-          <SignUpInputUsername
+          <SignUpInputU
             onChangeText={this.handleUsernameChange}
             value={regValues.username}
           />
 
-          <SignUpInputEmail
+          <SignUpInputE
             onChangeText={this.handleEmailChange}
             value={regValues.email}
           />
 
-          <SignUpInputPassword
+          <SignUpInputP
             onChangeText={this.handlePasswordChange}
             value={regValues.password}
           />

@@ -6,7 +6,7 @@ import Spinner from 'react-native-spinkit'
 const styles = StyleSheet.create({
   // default style applied to button views
   default: {
-    width: 260,
+    width: 220,
     height: 60,
 
     borderRadius: 30,
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: 10,
+    marginBottom: 10,
 
     display: 'flex',
     flexDirection: 'column',
@@ -76,13 +77,13 @@ class Button extends React.Component {
       <View
         style={[
           // compose styleSheets
+          styles.default,
+          props.style,
           {
             transform: [
               {scale: this.state.scale}
             ]
-          },
-          props.style,
-          styles.default
+          }
         ]}
         elevation={props.elevation}
         /** listeners */
@@ -110,12 +111,13 @@ class Button extends React.Component {
   }
 }
 
-export class LoginTransparentButton extends Button {
-  constructor (props) {
-    props.style = {
-      backgroundColor: 'transparent'
-    }
-    props.textStyle = {}
-    super(props)
-  }
-}
+export const LoginButton = props =>
+  <Button {...props} buttonTitle={'LOGIN'} style={{ marginTop: 40 }}/>
+
+export const SignUpBlueButton = props =>
+  <Button
+    {...props}
+    buttonTitle={'SIGN UP'}
+    style={{ marginTop: 40, backgroundColor: '#33b5e5', borderWidth: 0 }}
+    elevation={4}
+  />

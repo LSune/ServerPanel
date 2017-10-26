@@ -3,7 +3,7 @@ import { StyleSheet, Alert, Keyboard, Text, Dimensions } from 'react-native'
 
 import {
   LoginContainer,
-  LoginButton,
+  // LoginButton,
   LoginInputUsername,
   LoginInputPassword,
   LoginForgetPass,
@@ -12,12 +12,13 @@ import {
 
 import { LogoViewWrapper, LogoView } from '../components/index'
 
+import { LoginInputU, LoginInputP } from '../components/Input'
+
 import autobind from 'autobind-decorator'
 import { observer, inject } from 'mobx-react'
-import { LoginTransparentButton } from '../components/Button'
+import { LoginButton } from '../components/Button'
 
 const { width } = Dimensions.get('window')
-console.log(LoginTransparentButton)
 
 @inject('userStore')
 @observer
@@ -53,12 +54,12 @@ export default class Login extends React.Component {
           height={this.state.wrapperHeight}
           initHeight={this.state.wrapperHeight}
         >
-          <LoginInputUsername
+          <LoginInputU
             value={loginValues.username}
             onChangeText={this.handleUsernameChange}
             onFocus={() => this.setState({showLogo: false})}
           />
-          <LoginInputPassword
+          <LoginInputP
             value={loginValues.password}
             onChangeText={this.handlePasswordChange}
             onFocus={() => this.setState({showLogo: false})}

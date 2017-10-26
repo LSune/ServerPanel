@@ -67,47 +67,6 @@ export const SignUpHeadline = styled.Text`
   width: ${() => 360}
 `
 
-export const SignUpInput = styled(props => (
-  <View style={props.style}>
-    <LeftIcon source={icons[props.iconName]}/>
-    <RightInput
-      placeholder={props.placeholder}
-      onChangeText={(text) => props.onChangeText && props.onChangeText(text)}
-      value={props.value}
-      secureTextEntry={props.password}
-      placeholderTextColor={'rgba(0,0,0,0.2)'}
-      color={'#5e5e5e'}
-    />
-  </View>
-))`
-  display: flex;
-  flex-direction: row;
-  
-  height: ${() => 48};
-  width: ${() => 200};
-  
-  border-bottom-width: ${1};
-  border-bottom-color: #AAAAAA88;
-  
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: ${16};
-`
-
-export const SignUpInputUsername = SignUpInput.extend.attrs({
-  placeholder: 'USERNAME',
-  iconName: 'person'
-})``
-export const SignUpInputEmail = SignUpInput.extend.attrs({
-  placeholder: 'E-MAIL',
-  iconName: 'email'
-})``
-export const SignUpInputPassword = SignUpInput.extend.attrs({
-  placeholder: 'PASSWORD',
-  iconName: 'lock',
-  password: true
-})``
-
 export const SignUpControlWrapper = styled(LoginControlsWrapper)`
   padding-top: ${48};
 `
