@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import Spinner from 'react-native-spinkit'
 
 const styles = StyleSheet.create({
   // default style applied to button views
   default: {
-    width: 220,
+    width: 200,
     height: 60,
 
     borderRadius: 30,
@@ -30,6 +30,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '200',
     fontFamily: 'acrom-light'
+  },
+
+  defaultLinkStyle: {
+    bottom: 10,
+    position: 'absolute',
+
+    width: '100%'
+  },
+  defaultLinkTextStyle: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '200',
+    fontFamily: 'acrom-light',
+    textDecorationLine: 'underline'
   }
 })
 
@@ -102,7 +117,7 @@ class Button extends React.Component {
               color={'#ffffff'}
             />
             : <Text
-              style={[props.textStyle, styles.defaultText]}
+              style={[styles.defaultText, props.textStyle]}
               children={props.buttonTitle}
             />
         }
@@ -112,12 +127,28 @@ class Button extends React.Component {
 }
 
 export const LoginButton = props =>
-  <Button {...props} buttonTitle={'LOGIN'} style={{ marginTop: 40 }}/>
+  <Button {...props} buttonTitle={'LOGIN'} style={{ marginTop: 30 }}/>
 
 export const SignUpBlueButton = props =>
   <Button
     {...props}
     buttonTitle={'SIGN UP'}
-    style={{ marginTop: 40, backgroundColor: '#33b5e5', borderWidth: 0 }}
+    style={{ marginTop: 30, backgroundColor: '#33b5e5', borderWidth: 0 }}
     elevation={4}
   />
+
+export const SignUpWhiteButton = props =>
+  <Button
+    {...props}
+    buttonTitle={'SIGN UP'}
+    style={{ marginTop: 30, backgroundColor: '#ffffff', borderWidth: 0 }}
+    textStyle={{ color: '#33b5e5' }}
+  />
+
+export const LoginForgetPass = props =>
+  <TouchableOpacity
+    style={styles.defaultLinkStyle}
+    onPress={() => props.onPress && props.onPress()}
+  >
+    <Text style={styles.defaultLinkTextStyle} children={'Forget Password?'}/>
+  </TouchableOpacity>

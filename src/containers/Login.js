@@ -1,22 +1,14 @@
 import React from 'react'
 import { StyleSheet, Alert, Keyboard, Text, Dimensions } from 'react-native'
 
-import {
-  LoginContainer,
-  // LoginButton,
-  LoginInputUsername,
-  LoginInputPassword,
-  LoginForgetPass,
-  LoginControlsWrapper
-} from '../components/Login.Components'
-
-import { LogoViewWrapper, LogoView } from '../components/index'
+import { LogoViewWrapper, LogoView } from '../components/Logo'
 
 import { LoginInputU, LoginInputP } from '../components/Input'
+import { LoginContainer, LoginControlsWrapper } from '../components/Wrapper'
 
 import autobind from 'autobind-decorator'
 import { observer, inject } from 'mobx-react'
-import { LoginButton } from '../components/Button'
+import { LoginButton, LoginForgetPass } from '../components/Button'
 
 const { width } = Dimensions.get('window')
 
@@ -39,11 +31,7 @@ export default class Login extends React.Component {
   render () {
     const { loginValues, inProgress } = this.props.userStore
     return (
-      <LoginContainer
-        start={{x: 0, y: 1}}
-        end={{x: 1, y: 0}}
-        colors={['#36D1DC', '#5B86E5']}
-      >
+      <LoginContainer>
         <LogoViewWrapper>
           {
             this.state.showLogo &&

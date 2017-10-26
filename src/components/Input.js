@@ -58,7 +58,7 @@ export const Input = props =>
       underlineColorAndroid={'transparent'}
       placeholderTextColor={'rgba(255,255,255,0.6)'}
       {...props}
-      style={styles.textInput}
+      style={[styles.textInput, props.style]}
     />
   </View>
 Input.propTypes = {
@@ -90,7 +90,8 @@ export const LoginInputP = props => {
   return Input({
     ...props,
     iconSource: require('../assets/icons/password_white@png.png'),
-    placeholder: 'PASSWORD'
+    placeholder: 'PASSWORD',
+    secureTextEntry: true
   })
 }
 
@@ -108,13 +109,15 @@ const SignUpInput = props =>
       marginRight: 'auto',
       marginBottom: 20,
 
-      paddingTop: 2,
-      paddingBottom: 2,
+      paddingTop: 1,
+      paddingBottom: 1,
 
       borderRadius: 0
     },
-    placeholderTextColor: 'rgba(0,0,0,0.2)',
-    color: '#5e5e5e'
+    style: {
+      color: '#5e5e5e'
+    },
+    placeholderTextColor: 'rgba(0,0,0,0.2)'
   })
 
 /**
@@ -148,6 +151,7 @@ export const SignUpInputP = props => {
   return SignUpInput({
     ...props,
     iconSource: require('../assets/icons/lock@png.png'),
-    placeholder: 'PASSWORD'
+    placeholder: 'PASSWORD',
+    secureTextEntry: true
   })
 }

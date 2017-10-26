@@ -1,32 +1,23 @@
 import React from 'react'
-import { View, Text, Dimensions, Alert } from 'react-native'
-
-import { FlexView } from '../components'
-
-import {
-  CircleBackground,
-  SignUpHeadline,
-  SignUpContainer,
-  SignUpControlWrapper
-} from '../components/SignUp.Components'
+import { View, Text, Dimensions, Alert, KeyboardAvoidingView, Keyboard } from 'react-native'
 
 import { SignUpInputE, SignUpInputP, SignUpInputU } from '../components/Input'
 import { SignUpBlueButton } from '../components/Button'
+import CircleBackground from '../components/SignUpTitle'
 
 import userStore from '../stores/userStore'
 import { observer, inject } from 'mobx-react'
+
+import autobind from 'autobind-decorator'
 
 const { width } = Dimensions.get('window')
 
 @inject('userStore')
 @observer
 export default class SignUp extends React.Component {
-  constructor (props) {
-    super(props)
-    // todo
-    console.log(props)
+  state = {
+    showTitle: true
   }
-
   handleUsernameChange = v => this.props.userStore.setRegUsername(v)
   handleEmailChange = v => this.props.userStore.setRegEmail(v)
   handlePasswordChange = v => this.props.userStore.setRegPassword(v)
@@ -34,15 +25,14 @@ export default class SignUp extends React.Component {
   render () {
     const { regValues, inProgress } = this.props.userStore
     return (
-      <SignUpContainer>
-        <FlexView>
-          <CircleBackground>
-            <SignUpHeadline>
-              Create Your Account
-            </SignUpHeadline>
-          </CircleBackground>
-        </FlexView>
-        <SignUpControlWrapper height={width * 1.1} initHeight={width * 1.1}>
+      <View style={{ flex: 1, paddingTop: 0 }}>
+        {
+          this.state.showTitle &&
+            <CircleBackground/>
+        }
+        <View
+          style={{ paddingTop: 50, paddingBottom: 10 }}
+        >
           <SignUpInputU
             onChangeText={this.handleUsernameChange}
             value={regValues.username}
@@ -63,8 +53,23 @@ export default class SignUp extends React.Component {
             disabled={inProgress}
             onPress={() => this.props.userStore.register()}
           />
-        </SignUpControlWrapper>
-      </SignUpContainer>
+        </View>
+      </View>
     )
+  }
+  @autobind handleKeyboardShow () {
+    this.setState({ showTitle: false })
+  }
+  @autobind handleKeyboardHide () {
+    this.setState({ showTitle: true })
+  }
+  componentDidMount () {
+    // 响应键盘的动作。
+    Keyboard.addListener('keyboardDidShow', this.handleKeyboardShow)
+    Keyboard.addListener('keyboardDidHide', this.handleKeyboardHide)
+  }
+  componentWillUnmount () {
+    Keyboard.removeListener('keyboardDidShow', this.handleKeyboardShow)
+    Keyboard.removeListener('keyboardDidHide', this.handleKeyboardHide)
   }
 }
