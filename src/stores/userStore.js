@@ -1,7 +1,28 @@
 import { API_ROOT, HTTP_GET, HTTP_POST, JSON_CONTENT_TYPE } from '../consts/index'
-import { observable, action } from 'mobx'
+import { observable, action, autorun, computed } from 'mobx'
 import { fetchErrorHandler } from '../utils'
+
+import { AsyncStorage } from 'react-native'
+
 class UserStore {
+  constructor (args) {
+    // bind token's change to commonStore
+    autorun(() => {
+      console.log(this.token)
+      console.log(this.username)
+      this.token && AsyncStorage.setItem('@user:token', this.token)
+      this.username && AsyncStorage.setItem('@user:username', this.username)
+    })
+  }
+
+  @computed get loggedIn () {
+    return (async () => {
+      const token = await AsyncStorage.getItem('@user:token')
+      const username = await AsyncStorage.getItem('@user:username')
+      return token && username
+    })()
+  }
+
   // 标记当前是否处于加载状态
   @observable inProgress = false
   // 标记当前存在的错误
@@ -65,6 +86,7 @@ class UserStore {
       this.inProgress = false
       return fetchErrorHandler(res)
     }).then(json => {
+      this.username = this.regValues.username
       this.token = json.token
     }).catch(error => {
       this.errors = error
@@ -89,6 +111,7 @@ class UserStore {
       this.inProgress = false
       return fetchErrorHandler(res)
     }).then(json => {
+      this.username = this.loginValues.username
       this.token = json.token
     }).catch(error => {
       this.errors = error

@@ -58,7 +58,7 @@ export default class Login extends React.Component {
           <LoginButton
             onPress={
               () => this.props.userStore.login()
-                .then(() => this.props.history.push('/main/instances'))
+                .then(() => this.props.history.replace('/main/instances'))
             }
             isLoading={inProgress}
             disabled={inProgress}
