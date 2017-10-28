@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     textAlign: 'left',
 
-    paddingLeft: 40
+    paddingLeft: 30
   },
   bigText: {
     fontSize: 40,
@@ -56,6 +56,19 @@ const statusStyles = StyleSheet.create({
   }
 })
 
+const tagsStyles = StyleSheet.create({
+  defaultWrapper: {
+    height: 30,
+    flexDirection: 'row'
+  },
+  defaultOuterWrapper: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    flexGrow: 1,
+    paddingLeft: 30
+  }
+})
+
 const statusIcons = {
   Running: require('../assets/icons/running@png.png'),
   Pending: require('../assets/icons/pending@png.png'),
@@ -73,6 +86,33 @@ const Status = props =>
         </View>
       )
     }
+  </View>
+
+const tagsIcons = {
+  QCLOUD: require('../assets/icons/qcloud_tag@png.png'),
+  QINGCLOUD: require('../assets/icons/qingcloud_tag@png.png'),
+  ALIYUN: require('../assets/icons/aliyun_tag@png.png')
+}
+
+const sizes = {
+  QCLOUD: [240, 90],
+  QINGCLOUD: [300, 90],
+  ALIYUN: [210, 90]
+}
+
+const Tags = props =>
+  <View style={tagsStyles.defaultOuterWrapper}>
+    <View style={tagsStyles.defaultWrapper}>
+      {
+        ['qcloud', 'qingcloud', 'aliyun'].map(value =>
+          <Image
+            key={value}
+            style={{ height: 30, width: 30 * sizes[value.toUpperCase()][0] / sizes[value.toUpperCase()][1] }}
+            source={tagsIcons[value.toUpperCase()]}
+          />
+        )
+      }
+    </View>
   </View>
 
 export default InstancesOverview = props =>
@@ -97,6 +137,6 @@ export default InstancesOverview = props =>
         </View>
         <View style={{ flexShrink: 0, width: 0.3 * width }}><Status/></View>
       </View>
-      <View style={{ height: 0.2 * width, backgroundColor: 'blue' }}></View>
+      <View style={{ height: 0.2 * width }}><Tags/></View>
     </LinearGradient>
   </View>
