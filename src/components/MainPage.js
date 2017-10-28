@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     flexShrink: 0,
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingTop: 7
   },
   defaultBottomSub: {
     flexGrow: 1,
@@ -42,23 +43,24 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     // transform: [{ scale: 0.5 }],
-    height: 36,
-    width: 36
+    height: 30,
+    width: 30
   }
 })
 
 const icons = [
   [require('../assets/icons/server@png.png'), require('../assets/icons/server_grey@png.png')],
+  [require('../assets/icons/containers@png.png'), require('../assets/icons/containers_grey@png.png')],
   [require('../assets/icons/status@png.png'), require('../assets/icons/status_grey@png.png')],
   [require('../assets/icons/settings@png.png'), require('../assets/icons/settings_grew@png.png')]
 ]
 
 const MainPage = props =>
   <View style={styles.defaultMain}>
-    <View style={styles.defaultViewport} ref={() => console.log(props.children)}>{props.children}</View>
+    <View style={styles.defaultViewport}>{props.children}</View>
     <View style={styles.defaultToolBar}>
       {
-        ['Instances', 'Status', 'Settings'].map((text, value) =>
+        ['Instances', 'Dockers', 'Status', 'Settings'].map((text, value) =>
           <View
             elevation={4}
             key={value}

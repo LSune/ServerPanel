@@ -1,7 +1,6 @@
 import React from 'react'
 import { StatusBar, View, Alert } from 'react-native'
 import { NativeRouter, AndroidBackButton } from 'react-router-native'
-import styled from 'styled-components/native'
 import { Provider } from 'mobx-react'
 import RootRoute from './src/routes'
 
@@ -11,20 +10,16 @@ const stores = {
   userStore
 }
 
-const RootContainer = styled.View`
-  flex: 1;
-`
-
 export default class App extends React.Component {
   render () {
     return (
       <Provider {...stores}>
         <NativeRouter>
-          <RootContainer>
+          <View style={{ flexGrow: 1 }}>
             <StatusBar translucent={true} backgroundColor={'rgba(0,0,0,0.1)'}/>
             <AndroidBackButton/>
             <RootRoute/>
-          </RootContainer>
+          </View>
         </NativeRouter>
       </Provider>
     )
